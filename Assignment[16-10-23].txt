@@ -1,0 +1,33 @@
+1. select gender,count(gender) from employees group by gender order by count(gender) desc;
+
+2. select month(hire_date),count(month(hire_date)) from employees group by month(hire_date) order by count(month(hire_date)) desc  limit 1;
+
+3. select concat(first_name,' ',last_name) from employees where gender ='f' and first_name='kellie' or first_name='aruna';
+
+4. select dept_name from departments where dept_no between 'd003' and 'd006';
+
+6. select concat(first_name,last_name) from employees where gender='f' and year(birth_date)>=2000;
+
+7. SELECT title, ROUND(AVG(salary), 2) AS avg_salary FROM titles JOIN salaries ON salaries.emp_no = titles.emp_no GROUP BY title ORDER BY avg_salary DESC;
+
+8. SELECT e.first_name,e.last_name ,count(d.dept_no) from employees e inner join dept_emp d using(emp_no) inner join departments dm using(dept_no) group by d.emp_no having count(d.dept_no)>=2;
+
+9. select e.first_name,e.last_name,s.salary from employees e  inner join salaries s using(emp_no) where s.salary=(select max(salary) from salaries);
+
+10. select e.first_name,e.last_name,s.salary from employees e  inner join salaries s using(emp_no) order by s.salary desc limit 2,1 ;
+
+11. SELECT
+    d.dept_name,
+    MIN(TIMESTAMPDIFF(YEAR, e.birth_date, e.hire_date)) AS youngest_employee_age
+FROM
+    employees e
+inner JOIN
+    dept_emp de using(emp_no)
+inner join
+	departments d using(dept_no)
+GROUP BY
+    d.dept_name;
+
+
+12.select e.*,d.dept_name from employees e inner join dept_emp de using(emp_no)   inner join departments d using(dept_no) where e.first_name NOT REGEXP '[aeiouAEIOU]';
+    
